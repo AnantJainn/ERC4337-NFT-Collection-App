@@ -11,11 +11,11 @@ import {
 import { ChakraProvider } from "@chakra-ui/react";
 import { API_KEY, FACTORY_ADDRESS } from "../constant/addresses";
 import Navbar from "../components/Navbar";
-
+import { Sepolia } from "@thirdweb-dev/chains";
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
 // You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-const activeChain = "sepolia";
+const activeChain = Sepolia;
 const smartWalletOptions = {
   factoryAddress: FACTORY_ADDRESS,
   gasless: true,

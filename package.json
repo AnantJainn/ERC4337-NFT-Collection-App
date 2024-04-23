@@ -14,6 +14,7 @@
     "@chakra-ui/react": "^2.6.1",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@thirdweb-dev/chains": "^0.1.97",
     "@thirdweb-dev/react": "^3",
     "@thirdweb-dev/sdk": "^3",
     "ethers": "^5",
