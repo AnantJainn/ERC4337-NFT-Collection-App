@@ -31,7 +31,13 @@ const Home: NextPage = () => {
         </Flex>
       ) : (
         <Container maxW={"1200px"}>
-          <SimpleGrid columns={2} spacing={10} my={10}>
+          <SimpleGrid
+            columns={[1, 2, 3]}
+            spacing={10}
+            my={10}
+            minChildWidth="250px"
+            width="100%"
+          >
             <NFTCard tokenId={"0"} />
             <NFTCard tokenId={"1"} />
             <NFTCard tokenId={"2"} />
