@@ -39,8 +39,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         smartWallet(walletConnect(), smartWalletOptions),
         smartWallet(localWallet(), smartWalletOptions),
         smartWallet(
+          // embeddedWallet({
+          //   auth: { options: ["email", "google", "apple", "facebook"] },
+          // }),
           embeddedWallet({
-            auth: { options: ["email", "google", "apple", "facebook"] },
+
           }),
           smartWalletOptions
         ),
