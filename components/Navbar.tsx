@@ -58,7 +58,9 @@ export default function Navbar() {
   return (
     <Container maxW={"1200px"} py={5}>
       <Flex justifyContent={"space-between"} alignItems={"center"}>
-        <Text fontWeight={"bold"}>Raindrops X</Text>
+        <Text fontWeight={"bold"} fontSize={30}>
+          Raindrops X
+        </Text>
         {!address ? (
           <ConnectWallet
             className={styles.walletButton}
