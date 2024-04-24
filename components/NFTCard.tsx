@@ -23,7 +23,7 @@ const NFTCard: React.FC<Props> = ({ tokenId }) => {
     overflow: "hidden", // Hide any overflow
   };
 
-  const contentContainerStyle = {
+  const contentContainerStyle: React.CSSProperties = {
     backgroundColor: "#202020", // Background color for the content section
     borderRadius: "0 0 12px 12px", // Rounded corners only at the bottom
     padding: "20px", // Added padding for spacing
@@ -66,9 +66,9 @@ const NFTCard: React.FC<Props> = ({ tokenId }) => {
     >
       <Box style={imageContainerStyle}>
         <img
-          src={data?.metadata.image}
-          alt={data?.metadata.name}
-          style={{ width: "100%", height: "300px", objectFit: "cover" }} // Reduced height
+          src={data?.metadata?.image || ""} // Provide an empty string as a fallback value
+          alt={data?.metadata?.name?.toString() || ""}
+          style={{ width: "100%", height: "300px", objectFit: "cover" }}
         />
       </Box>
       <Box style={contentContainerStyle}>
@@ -81,7 +81,7 @@ const NFTCard: React.FC<Props> = ({ tokenId }) => {
         ) : (
           <Web3Button
             contractAddress={NFT_ADDRESS}
-            action={() => contract.erc1155.claim(tokenId, 1)}
+            action={() => contract?.erc1155?.claim(tokenId, 1)}
             style={buttonStyle}
           >
             Claim NFT

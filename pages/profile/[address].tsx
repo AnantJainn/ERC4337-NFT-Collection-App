@@ -160,8 +160,7 @@ export default function ProfilePage() {
                   src={nft.metadata.image}
                   height="200px"
                   width="100%"
-                  objectFit="cover"
-                  borderRadius="md"
+                  // borderRadius="md"
                 />
                 <Flex
                   justifyContent={"space-between"}
