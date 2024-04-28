@@ -170,7 +170,7 @@ export default function ProfilePage() {
                   <Text fontWeight={"bold"}>{nft.metadata.name}</Text>
                   <Text>Qty: {nft.quantityOwned}</Text>
                 </Flex>
-                <Text fontSize={"sm"} mt={2}>
+                {/* <Text fontSize={"sm"} mt={2}>
                   Transfer to:
                 </Text>
                 <Input
@@ -205,7 +205,7 @@ export default function ProfilePage() {
                       Transfer
                     </Web3Button>
                   </Flex>
-                )}
+                )} */}
               </Card>
             ))}
         </SimpleGrid>
