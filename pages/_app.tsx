@@ -25,14 +25,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThirdwebProvider
       clientId="7e9b4a065a1794e93d8839b9ebbbea96"
       activeChain={activeChain}
-      // supportedWallets={[
-      //   smartWallet({
-      //     factoryAddress: FACTORY_ADDRESS,
-      //     thirdwebApiKey: API_KEY,
-      //     gasless: true,
-      //     personalWallets: [metamaskWallet(), localWallet()],
-      //   }),
-      // ]}
       supportedWallets={[
         smartWallet(metamaskWallet(), smartWalletOptions),
         smartWallet(coinbaseWallet({ recommended: true }), smartWalletOptions),
@@ -42,9 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           // embeddedWallet({
           //   auth: { options: ["email", "google", "apple", "facebook"] },
           // }),
-          embeddedWallet({
-
-          }),
+          embeddedWallet({}),
           smartWalletOptions
         ),
       ]}

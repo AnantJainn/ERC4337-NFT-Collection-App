@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import {
   Web3Button,
   useAddress,
   useContract,
   useNFT,
+  useClaimToken,
 } from "@thirdweb-dev/react";
-import { NFT_ADDRESS } from "../constant/addresses";
+import { NFT_ADDRESS, TOKEN_ADDRESS } from "../constant/addresses";
 
 type Props = {
   tokenId: string;
@@ -14,8 +15,20 @@ type Props = {
 
 const NFTCard: React.FC<Props> = ({ tokenId }) => {
   const address = useAddress();
+  const { contract: nftContract } = useContract(NFT_ADDRESS);
+  // const { contract: erc20Contract } = useContract(TOKEN_ADDRESS);
+
+  // console.log("ERC20", erc20Contract);
+  console.log("Address", address);
+
+  // const {
+  //   mutate: claimTokens,
+  //   isLoading,
+  //   error,
+  // } = useClaimToken(erc20Contract);
+
   const { contract } = useContract(NFT_ADDRESS);
-  const { data } = useNFT(contract, tokenId);
+  const { data } = useNFT(nftContract, tokenId);
 
   const imageContainerStyle = {
     backgroundColor: "#DDD8FC", // Background color for the image section
@@ -81,13 +94,23 @@ const NFTCard: React.FC<Props> = ({ tokenId }) => {
         ) : (
           <Web3Button
             contractAddress={NFT_ADDRESS}
-            action={() => contract?.erc1155?.claim(tokenId, 1)}
+            action={() => nftContract?.erc1155?.claim(tokenId, 1)}
             style={buttonStyle}
           >
             Claim NFT
           </Web3Button>
         )}
       </Box>
+      {/* <button
+        onClick={() =>
+          claimTokens({
+            to: String(address),
+            amount: 100,
+          })
+        }
+      >
+        Claim Tokens!
+      </button> */}
     </Box>
   );
 };

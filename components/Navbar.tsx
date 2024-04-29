@@ -1,60 +1,56 @@
-// import {
-//   Avatar,
-//   Container,
-//   Flex,
-//   Menu,
-//   MenuButton,
-//   MenuItem,
-//   MenuList,
-//   Text,
-// } from "@chakra-ui/react";
-// import { ConnectWallet, useAddress, useDisconnect } from "@thirdweb-dev/react";
-// import styles from "../styles/Home.module.css";
-// import Link from "next/link";
-
-// export default function Navbar() {
-//   const address = useAddress();
-//   const disconnect = useDisconnect();
-
-//   return (
-//     <Container maxW={"1200px"} py={5}>
-//       <Flex justifyContent={"space-between"} alignItems={"center"}>
-//         <Text fontWeight={"bold"}>Raindrops X</Text>
-//         {!address ? (
-//           <ConnectWallet
-//             className={styles.walletButton}
-//             btnTitle="Sign In"
-//             theme="light"
-//           />
-//         ) : (
-//           <Menu>
-//             <MenuButton>
-//               <Avatar
-//                 size={"sm"}
-//                 src={`https://avatars.dicebear.com/api/avataaars/${address}.svg`}
-//               />
-//             </MenuButton>
-//             <MenuList>
-//               <MenuItem>
-//                 <Link href={`/profile/${address}`}>Profile</Link>
-//               </MenuItem>
-//               <MenuItem onClick={disconnect}>Sign Out</MenuItem>
-//             </MenuList>
-//           </Menu>
-//         )}
-//       </Flex>
-//     </Container>
-//   );
-// }
-import { Avatar, Container, Flex, Text } from "@chakra-ui/react";
-import { ConnectWallet, useAddress, useDisconnect } from "@thirdweb-dev/react";
+import { Avatar, Container, Flex, Text, useToast } from "@chakra-ui/react";
+import {
+  ConnectWallet,
+  useAddress,
+  useDisconnect,
+  useContract,
+  useClaimToken,
+} from "@thirdweb-dev/react";
+import { useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-
+import { TOKEN_ADDRESS } from "../constant/addresses";
 export default function Navbar() {
   const address = useAddress();
   const disconnect = useDisconnect();
+  const toast = useToast();
 
+  // Fetch ERC-20 contract
+  const { contract: erc20Contract } = useContract(TOKEN_ADDRESS);
+
+  // Claim ERC-20 tokens
+  const {
+    mutate: claimTokens,
+    isLoading,
+    error,
+  } = useClaimToken(erc20Contract);
+
+  useEffect(() => {
+    if (address) {
+      const claim = async () => {
+        try {
+          await claimTokens({ to: address, amount: 20 });
+          toast({
+            title: "Tokens Claimed!",
+            description: "You have successfully claimed ERC-20 tokens.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        } catch (err) {
+          toast({
+            title: "Error",
+            description: "Failed to claim tokens: " + err.message,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      };
+
+      claim();
+    }
+  }, [address, claimTokens, toast]);
   return (
     <Container maxW={"1200px"} py={5}>
       <Flex justifyContent={"space-between"} alignItems={"center"}>
