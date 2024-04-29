@@ -38,9 +38,10 @@ export default function Navbar() {
             isClosable: true,
           });
         } catch (err) {
+          const errorMessage = (err as Error).message; // Type assertion
           toast({
             title: "Error",
-            description: "Failed to claim tokens: " + err.message,
+            description: "Failed to claim tokens: " + errorMessage,
             status: "error",
             duration: 5000,
             isClosable: true,
