@@ -30,35 +30,35 @@ export default function Navbar() {
 
   // State to track if tokens have been claimed for the current user
   const [tokensClaimed, setTokensClaimed] = useState(false);
-  useEffect(() => {
-    if (address && !tokensClaimed) {
-      // Check if address is available and tokens haven't been claimed yet
-      const claim = async () => {
-        try {
-          await claimTokens({ to: address, amount: 20 });
-          setTokensClaimed(true); // Update state to indicate tokens have been claimed
-          toast({
-            title: "Tokens Claimed!",
-            description: "You have successfully claimed ERC-20 tokens.",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-          });
-        } catch (err) {
-          const errorMessage = (err as Error).message; // Type assertion
-          toast({
-            title: "Error",
-            description: "Failed to claim tokens: " + errorMessage,
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-        }
-      };
+  // useEffect(() => {
+  //   if (address && !tokensClaimed) {
+  //     // Check if address is available and tokens haven't been claimed yet
+  //     const claim = async () => {
+  //       try {
+  //         await claimTokens({ to: address, amount: 20 });
+  //         setTokensClaimed(true); // Update state to indicate tokens have been claimed
+  //         toast({
+  //           title: "Tokens Claimed!",
+  //           description: "You have successfully claimed ERC-20 tokens.",
+  //           status: "success",
+  //           duration: 5000,
+  //           isClosable: true,
+  //         });
+  //       } catch (err) {
+  //         const errorMessage = (err as Error).message; // Type assertion
+  //         toast({
+  //           title: "Error",
+  //           description: "Failed to claim tokens: " + errorMessage,
+  //           status: "error",
+  //           duration: 5000,
+  //           isClosable: true,
+  //         });
+  //       }
+  //     };
 
-      claim();
-    }
-  }, [address, claimTokens, toast, tokensClaimed]);
+  //     claim();
+  //   }
+  // }, [address, claimTokens, toast, tokensClaimed]);
   // useEffect(() => {
   //   if (address && tokenBalance?.displayValue === "0") {
   //     console.log("tb", tokenBalance);
@@ -90,6 +90,39 @@ export default function Navbar() {
   //     claim();
   //   }
   // }, [address, claimTokens, toast, tokensClaimed, tokenBalance]);
+  useEffect(() => {
+    console.log("address:", address);
+    console.log("tokenBalance:", tokenBalance);
+    if (address && tokenBalance?.displayValue === "0.0") {
+      console.log("Claiming tokens...");
+      // Check if address is available, tokens haven't been claimed yet,
+      // and token balance is zero
+      const claim = async () => {
+        try {
+          await claimTokens({ to: address, amount: 20 });
+          setTokensClaimed(true); // Update state to indicate tokens have been claimed
+          toast({
+            title: "Tokens Claimed!",
+            description: "You have successfully claimed ERC-20 tokens.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        } catch (err) {
+          const errorMessage = (err as Error).message; // Type assertion
+          toast({
+            title: "Error",
+            description: "Failed to claim tokens: " + errorMessage,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      };
+
+      claim();
+    }
+  }, [address, claimTokens, toast, tokensClaimed, tokenBalance]);
 
   return (
     <Container maxW={"1200px"} py={5}>
@@ -97,7 +130,7 @@ export default function Navbar() {
         <Text fontWeight={"bold"} fontSize={30}>
           Raindrops X
         </Text>
-        <Text>Token Balance: {tokenBalance?.displayValue}</Text>
+        <Text fontSize={20}>Token Balance: {tokenBalance?.displayValue}</Text>
         {!address ? (
           <ConnectWallet
             className={styles.walletButton}
