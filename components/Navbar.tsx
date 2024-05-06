@@ -99,7 +99,7 @@ export default function Navbar() {
       // and token balance is zero
       const claim = async () => {
         try {
-          await claimTokens({ to: address, amount: 20 });
+          await claimTokens({ to: address, amount: 10 });
           setTokensClaimed(true); // Update state to indicate tokens have been claimed
           toast({
             title: "Tokens Claimed!",

@@ -15,8 +15,6 @@ const Home: NextPage = () => {
   const { contract } = useContract(NFT_ADDRESS);
 
   const { data: metadata, isLoading: loadingMetadata } = useMetadata(contract);
-  // const collectionImage = metadata?.image;
-  // const collectionName = metadata?.name;
 
   return (
     <Container maxW={"1200px"}>
@@ -41,7 +39,6 @@ const Home: NextPage = () => {
             <NFTCard tokenId={"0"} />
             <NFTCard tokenId={"1"} />
             <NFTCard tokenId={"2"} />
-            {/* <NFTCard tokenId={"3"} /> */}
           </SimpleGrid>
         </Container>
       )}
