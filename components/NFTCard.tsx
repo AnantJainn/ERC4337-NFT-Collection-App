@@ -36,13 +36,13 @@ const NFTCard: React.FC<Props> = ({ tokenId }) => {
 
   const headingStyle = {
     color: "#FFF",
-    fontSize: "1.6rem",
+    fontSize: "1.3rem",
     margin: "8px 0",
   };
 
   const descriptionStyle = {
     color: "#FFF",
-    fontSize: "1.4rem",
+    fontSize: "0.8rem",
     margin: "0 0 16px 0",
     overflow: "hidden",
     textOverflow: "ellipsis",
