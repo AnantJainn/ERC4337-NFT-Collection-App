@@ -48,7 +48,7 @@ const NFTCard: React.FC<Props> = ({ tokenId }) => {
     textOverflow: "ellipsis",
     display: "-webkit-box",
     WebkitLineClamp: 3, // Limit to 3 lines
-    WebkitBoxOrient: "vertical",
+    // WebkitBoxOrient: "vertical",
   };
 
   const buttonStyle = {
