@@ -97,10 +97,10 @@ export default function Navbar() {
                 {/* Margin based on screen size */}
                 Sign Out
               </Text>
-              <Avatar
+              {/* <Avatar
                 size={"sm"}
                 src={`https://avatars.dicebear.com/api/avataaars/${address}.svg`}
-              />
+              /> */}
             </>
           )}
           <Text fontSize={{ base: 12, md: 20 }} ml={{ base: 2, md: 4 }}>
