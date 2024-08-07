@@ -66,14 +66,33 @@ export default function SignIn() {
       } else {
         router.push("/signup");
       }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to sign in: " + error.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
+      // } catch (error) {
+      //   toast({
+      //     title: "Error",
+      //     description: "Failed to sign in: " + error.message,
+      //     status: "error",
+      //     duration: 5000,
+      //     isClosable: true,
+      //   });
+      // }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error",
+          description: "Failed to sign in: " + error.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: "An unknown error occurred.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     }
   };
 

@@ -17,6 +17,76 @@ export default function SignUp() {
   const toast = useToast();
   const router = useRouter();
 
+  // const handleSignUp = async () => {
+  //   if (!name || !email || !mobile) {
+  //     toast({
+  //       title: "Error",
+  //       description: "Name, Email, and Mobile are required",
+  //       status: "error",
+  //       duration: 5000,
+  //       isClosable: true,
+  //     });
+  //     return;
+  //   }
+
+  //   // Generate a new unique item
+  //   const item = [...Array(33)]
+  //     .map(() => Math.random().toString(36)[2])
+  //     .join("");
+
+  //   try {
+  //     // Sign up using the `/new` API
+  //     const response = await axios.post(
+  //       "https://ap-south-1.aws.data.mongodb-api.com/app/bharat-ethers-wiilw/endpoint/accounts/minter/new",
+  //       {
+  //         data: {
+  //           user: {
+  //             name,
+  //             mail: email,
+  //             mobile,
+  //             item,
+  //           },
+  //         },
+  //         srvc: "693a487dff92410b83df70894bc1b1dc1",
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: "2498e00cf1624c19bbe7b5f2faff55875",
+  //         },
+  //       }
+  //     );
+
+  //     if (response.data.stat) {
+  //       // Save the item value (you might want to store this in a database or local storage)
+  //       localStorage.setItem(email, item);
+
+  //       toast({
+  //         title: "Sign Up Successful!",
+  //         description: "You have successfully signed up.",
+  //         status: "success",
+  //         duration: 5000,
+  //         isClosable: true,
+  //       });
+  //       router.push("/");
+  //     } else {
+  //       toast({
+  //         title: "Error",
+  //         description: "Failed to sign up.",
+  //         status: "error",
+  //         duration: 5000,
+  //         isClosable: true,
+  //       });
+  //     }
+  //   } catch (error: unknown) {
+  //     toast({
+  //       title: "Error",
+  //       description: "Failed to sign up: " + error.message,
+  //       status: "error",
+  //       duration: 5000,
+  //       isClosable: true,
+  //     });
+  //   }
+  // };
   const handleSignUp = async () => {
     if (!name || !email || !mobile) {
       toast({
@@ -77,14 +147,26 @@ export default function SignUp() {
           isClosable: true,
         });
       }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to sign up: " + error.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
+    } catch (error: unknown) {
+      // Ensure `error` is an instance of `Error` before accessing `message`
+      if (error instanceof Error) {
+        toast({
+          title: "Error",
+          description: "Failed to sign up: " + error.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        // Handle unknown error type
+        toast({
+          title: "Error",
+          description: "An unknown error occurred.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     }
   };
 
